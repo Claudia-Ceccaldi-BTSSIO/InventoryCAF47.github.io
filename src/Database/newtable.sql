@@ -1,8 +1,9 @@
--- Table pour les utilisateurs
 CREATE TABLE Users (
-  id_user VARCHAR(255) PRIMARY KEY,
-  password_hash VARCHAR(255) NOT NULL -- Stocke le hachage du mot de passe
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  id_user VARCHAR(255) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL
 );
+
 
 CREATE TABLE Materiel (
   id_materiel INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,18 +19,17 @@ CREATE TABLE Materiel (
 -- Table pour les attestations de mise à disposition de matériel nomade
 CREATE TABLE AttestationsMateriel (
   id_attestation INT PRIMARY KEY AUTO_INCREMENT,
+  materiel_tt VARCHAR(255),
   ecran1_isiac VARCHAR(255),
   ecran2_isiac VARCHAR(255),
   uc_isiac VARCHAR(255),
   enregistre_dans_GACI BOOLEAN,
+  materiel VARCHAR(255),
   remis_par VARCHAR(255),
   emprunte_par VARCHAR(255),
-  fonction VARCHAR(255),
+  fonction_emprunteur VARCHAR(255),
   date_emprunt DATE,
-  signataire_emprunteur VARCHAR(255),
-  signataire_defi VARCHAR(255),
   date_restitution DATE,
   recepteur VARCHAR(255),
-  signataire_restitution VARCHAR(255),
   observations VARCHAR(255)
 );
