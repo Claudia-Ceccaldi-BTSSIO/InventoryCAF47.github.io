@@ -2,83 +2,81 @@
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+// echo "Le fichier authController.php est chargé.";
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+
+// Inclure le fichier de configuration avec les constantes de messages d'erreur
+require_once('../Utils/errors.php');
 
 // Inclure le fichier databaseConnexion.php
 require_once('../Models/databaseConnexion.php');
 
-class AuthController {
+class AuthController
+{
     private $connexion;
 
-    // Constructeur de la classe AuthController
-    public function __construct($connexion) {
+    public function __construct($connexion)
+    {
         $this->connexion = $connexion;
     }
 
-    // Fonction pour nettoyer les entrées utilisateur
-    private function cleanInput($data) {
-        $data = trim($data);
-        $data = stripslashes($data);
-        $data = htmlspecialchars($data);
-        return $data;
+    private function cleanInput($data)
+    {
+        return htmlspecialchars(trim($data), ENT_QUOTES, 'UTF-8');
     }
 
-    // Méthode pour gérer les requêtes POST
-    public function handlePostRequests() {
+    public function handlePostRequests()
+    {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-            return $this->handleLogin();
+            $this->handleLogin();
         }
     }
 
-    public function handleLogin() {
+    public function handleLogin()
+    {
         try {
-            // Nettoyage des entrées utilisateur
             $id_user = $this->cleanInput($_POST["id_user"]);
             $password = $this->cleanInput($_POST["password"]);
-    
-            // Affichez un message pour vérifier les valeurs nettoyées
-            echo "Identifiant nettoyé : " . $id_user . "<br>";
-            echo "Mot de passe nettoyé : " . $password . "<br>";
-    
-            // Vérification de l'existence de l'utilisateur dans la base de données
-            $sql = "SELECT password_hash FROM Users WHERE id_user = ?";
+
+            // Utilisez une requête préparée pour éviter les injections SQL
+            $sql = "SELECT id_user, password_hash FROM Users WHERE id_user = ?";
             $stmt = $this->connexion->prepare($sql);
             $stmt->bind_param("s", $id_user);
             $stmt->execute();
             $result = $stmt->get_result();
-    
-            // Affichez un message pour vérifier si la requête a été exécutée avec succès
-            echo "Requête exécutée avec succès.<br>";
-    
+
             if ($result->num_rows == 1) {
                 $row = $result->fetch_assoc();
-    
-                // Vérification du mot de passe
+
                 if (password_verify($password, $row['password_hash'])) {
-                    // Démarre la session et enregistre l'ID de l'utilisateur
-                    session_start();
+                    session_regenerate_id(true); // Régénère l'ID de session
                     $_SESSION['id_user'] = $id_user;
-    
-                    // Redirection vers parcView.php en cas de succès
-                    header("Location: ../Views/parcView.php");
+
+                    // Redirigez l'utilisateur vers la page précédente s'il y en a une, sinon vers parcView.php
+                    $redirect = isset($_SESSION['redirect']) ? $_SESSION['redirect'] : 'parcView.php';
+                    unset($_SESSION['redirect']); // Nettoyez la redirection
+
+                    header("Location: $redirect");
                     exit();
                 } else {
-                    // Mot de passe incorrect
-                    throw new Exception("Mot de passe incorrect.");
+                    throw new Exception(ERROR_INVALID_PASSWORD);
                 }
             } else {
-                // Utilisateur introuvable
-                throw new Exception("Identifiant introuvable.");
+                throw new Exception(ERROR_USERNAME_NOT_FOUND);
             }
-    
+
             $stmt->close();
         } catch (Exception $e) {
-            // Gestion des erreurs
-            $message = "Erreur : " . $e->getMessage();
-            echo $message;
+            // Enregistrez les erreurs dans un journal d'audit plutôt que de les afficher directement à l'utilisateur
+            error_log("Erreur d'authentification : " . $e->getMessage());
+
+            // Stockez le message d'erreur dans la session
+            $_SESSION['error_message'] = $e->getMessage();
+
+            // Redirigez l'utilisateur vers la page de connexion
+            header("Location: ../Views/loginView.php");
+            exit();
         }
     }
-    
 }
-?>
