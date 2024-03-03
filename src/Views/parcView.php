@@ -21,24 +21,23 @@ $materielData = $materiel->searchMateriel($searchTerm);
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
-    <!-- Métadonnées et liens CSS -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PARC de la CAF 47</title>
     <base href="http://localhost/projetcaf/">
     <link rel="stylesheet" href="public/assets/css/main.css?v=1">
 </head>
+
 <body>
     <nav>
         <!-- Barre de navigation -->
-          <!-- Bouton de retour à la page d'accueil -->
-          <a href="public/index.php" class="retour-accueil">Retour à la page d'accueil</a>
+        <!-- Bouton de retour à la page d'accueil -->
+        <a href="public/index.php" class="retour-accueil">Retour à la page d'accueil</a>
     </nav>
-
     <!-- Bouton pour afficher le formulaire d'ajout de matériel -->
     <button id="showFormButton">Ajout d'un matériel</button>
-
     <!-- Formulaire d'ajout de matériel, initialement caché -->
     <form id="ajoutMaterielForm" action="src/Utils/insert.php" method="post" style="display: none;">
         <!-- Champs du formulaire correspondant à la structure de la table 'Materiel' -->
@@ -51,13 +50,11 @@ $materielData = $materiel->searchMateriel($searchTerm);
         <input type="number" name="annee_uc" placeholder="Année UC">
         <input type="submit" value="Ajouter">
     </form>
-
     <!-- Formulaire de recherche -->
     <form action="src/Views/parcView.php" method="post">
         <input type="text" id="search" name="search" placeholder="Rechercher par nom...">
         <input type="submit" value="Recherche">
     </form>
-
     <!-- Affichage des messages d'erreur, le cas échéant -->
     <?php
     if (isset($_SESSION['error_message'])) {
@@ -65,7 +62,6 @@ $materielData = $materiel->searchMateriel($searchTerm);
         unset($_SESSION['error_message']);
     }
     ?>
-
     <!-- Tableau pour afficher les données du matériel -->
     <table>
         <thead>
@@ -83,7 +79,7 @@ $materielData = $materiel->searchMateriel($searchTerm);
         </thead>
         <tbody>
             <!-- Boucle pour remplir le tableau avec les données du matériel -->
-            <?php foreach ($materielData as $row): ?>
+            <?php foreach ($materielData as $row) : ?>
                 <tr>
                     <!-- Affichage des données de chaque matériel -->
                     <td><?= htmlspecialchars($row['nom']) ?></td>
@@ -111,4 +107,5 @@ $materielData = $materiel->searchMateriel($searchTerm);
         });
     </script>
 </body>
+
 </html>
