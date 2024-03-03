@@ -1,14 +1,17 @@
 <?php
-class DatabaseConnection {
+
+class DatabaseConnection
+{
     private static $instance = null;
     private $connection;
 
     private $host = 'localhost';
     private $username = 'root';
-    private $password = ''; 
+    private $password = '';
     private $database = 'applicationcaf';
 
-    private function __construct() {
+    private function __construct()
+    {
         try {
             $this->connection = new mysqli($this->host, $this->username, $this->password, $this->database);
             if ($this->connection->connect_error) {
@@ -22,15 +25,16 @@ class DatabaseConnection {
         }
     }
 
-    public static function getInstance() {
+    public static function getInstance()
+    {
         if (!self::$instance) {
             self::$instance = new DatabaseConnection();
         }
         return self::$instance;
     }
 
-    public function getConnection() {
+    public function getConnection()
+    {
         return $this->connection;
     }
 }
-?>
