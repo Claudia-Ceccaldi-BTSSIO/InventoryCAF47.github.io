@@ -16,16 +16,19 @@
 </head>
 
 <body>
-    <h2>Formulaire d'Attestation de Matériel Nomade</h2>
 
     <form action="src/Utils/insertMat.php" method="post">
 
         <!-- Premier encart caché par défaut -->
         <div class="encart encart-hidden" id="premier_encart">
-            <h3>Demande de prêt Matériel TT</h3>
+            <h3>Demande de prêt Matériel</h3>
             <div>
-                <label for="materiel_tt">Materiel TT:</label>
-                <input type="text" id="materiel_tt" name="materiel_tt">
+                <label for="materiel_tt">Matériel:</label>
+                <select name="materiel_tt" id="materiel_tt">
+                    <option value="ecran">Ecran</option>
+                    <option value="alimentation_uc">Chargeur UC</option>
+                    <option value="UC_tt">UC Télétravail</option>
+                </select>
             </div>
             <div>
                 <label for="ecran1_isiac">Isiac Écran 1:</label>
@@ -49,24 +52,24 @@
         </div>
 
         <!-- Bouton pour basculer la visibilité -->
-        <button type="button" onclick="toggleEncart()">Basculer la visibilité du premier encart</button>
+        <button type="button" onclick="toggleEncart()">Matériel télétravail</button>
 
         <!-- Deuxième encart -->
         <div class="encart">
             <h3>Demande de prêt Matériel (hors Télétravail)</h3>
             <div>
                 <label for="materiel">Matériel:</label>
-                <input type="text" id="materiel" name="materiel" required>
+                <select name="materiel" id="materiel" required>
+                    <option value="casque">casque</option>
+                    <option value="cle_usb">clé usb</option>
+                    <option value="souris">souris</option>
+                </select>
             </div>
-
         </div>
+
         <!-- Troisième encart -->
         <div class="encart">
             <h3>Autres Informations</h3>
-            <div>
-                <label for="remis_par">Remis par:</label>
-                <input type="text" id="remis_par" name="remis_par" required>
-            </div>
 
             <div>
                 <label for="emprunte_par">Emprunté par:</label>
@@ -74,23 +77,13 @@
             </div>
 
             <div>
-                <label for="fonction">Fonction de l'emprunteur:</label>
+                <label for="fonction_emprunteur">Fonction de l'emprunteur:</label>
                 <input type="text" id="fonction_emprunteur" name="fonction_emprunteur" required>
             </div>
 
             <div>
                 <label for="date_emprunt">Date d'emprunt:</label>
                 <input type="date" id="date_emprunt" name="date_emprunt" required>
-            </div>
-
-            <div>
-                <label for="date_restitution">Date de restitution:</label>
-                <input type="date" id="date_restitution" name="date_restitution" required>
-            </div>
-
-            <div>
-                <label for="recepteur">Récepteur:</label>
-                <input type="text" id="recepteur" name="recepteur" required>
             </div>
 
             <div>
