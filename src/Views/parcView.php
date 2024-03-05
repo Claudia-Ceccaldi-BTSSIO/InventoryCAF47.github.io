@@ -15,8 +15,16 @@ $materiel = new Materiel();
 // Récupération du terme de recherche s'il a été soumis
 $searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
 
+$nom = isset($_POST['nom']) ? $_POST['nom'] : '';
+$prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
+$service = isset($_POST['service']) ? $_POST['service'] : '';
+$type_select = isset($_POST['type_select']) ? $_POST['type_select'] : '';
+$_description = isset($_POST['_description']) ? $_POST['_description'] : '';
+$emplacement = isset($_POST['emplacement']) ? $_POST['emplacement'] : '';
+$annee_uc = isset($_POST['annee_uc']) ? $_POST['annee_uc'] : '';
+
 // Appel de la méthode searchMateriel pour obtenir les données en fonction du terme de recherche
-$materielData = $materiel->searchMateriel($searchTerm);
+$materielData = $materiel->searchMateriel($nom, $prenom, $service, $type_select, $_description, $emplacement, $annee_uc);
 ?>
 
 <!DOCTYPE html>
