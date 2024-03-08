@@ -18,13 +18,13 @@ function envoyerMail($message)
         // Informations personnelles
         $mail->Host = "smtp.office365.com";
         $mail->Port = "587";
-        $mail->Username = "kira47@hotmail.fr";
-        $mail->Password = "Sangoku2018@";
+        $mail->Username = "************";
+        $mail->Password = "************";
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         // Expéditeur
-        $mail->setFrom('kira47@hotmail.fr', 'claudia');
+        $mail->setFrom('***********', '*********');
         // Destinataire dont le nom peut également être indiqué en option
-        $mail->addAddress('kira47@hotmail.fr', 'Sandrine');
+        $mail->addAddress('*********', '*********');
         //  $mail->SMTPDebug = "";
 
 
