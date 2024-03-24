@@ -15,16 +15,8 @@ $materiel = new Materiel();
 // Récupération du terme de recherche s'il a été soumis
 $searchTerm = isset($_POST['search']) ? $_POST['search'] : '';
 
-$nom = isset($_POST['nom']) ? $_POST['nom'] : '';
-$prenom = isset($_POST['prenom']) ? $_POST['prenom'] : '';
-$service = isset($_POST['service']) ? $_POST['service'] : '';
-$type_select = isset($_POST['type_select']) ? $_POST['type_select'] : '';
-$_description = isset($_POST['_description']) ? $_POST['_description'] : '';
-$emplacement = isset($_POST['emplacement']) ? $_POST['emplacement'] : '';
-$annee_uc = isset($_POST['annee_uc']) ? $_POST['annee_uc'] : '';
-
 // Appel de la méthode searchMateriel pour obtenir les données en fonction du terme de recherche
-$materielData = $materiel->searchMateriel($nom, $prenom, $service, $type_select, $_description, $emplacement, $annee_uc);
+$materielData = $materiel->searchMateriel($searchTerm);
 ?>
 
 <!DOCTYPE html>
@@ -52,10 +44,10 @@ $materielData = $materiel->searchMateriel($nom, $prenom, $service, $type_select,
         <input type="text" name="nom" placeholder="Nom" required>
         <input type="text" name="prenom" placeholder="Prénom" required>
         <input type="text" name="service" placeholder="Service" required>
-        <input type="text" name="type_select" placeholder="Type de matériel" required>
-        <input type="text" name="_description" placeholder="Description" required>
-        <input type="text" name="emplacement" placeholder="Emplacement" required>
-        <input type="number" name="annee_uc" placeholder="Année UC">
+        <input type="text" name="type_materiel" placeholder="Type de matériel" required> <!-- Correction -->
+        <input type="text" name="description_materiel" placeholder="Description" required> <!-- Correction -->
+        <input type="text" name="emplacement_materiel" placeholder="Emplacement" required> <!-- Correction -->
+        <input type="number" name="annee_materiel" placeholder="Année UC"> <!-- Correction -->
         <input type="submit" value="Ajouter">
     </form>
     <!-- Formulaire de recherche -->
@@ -66,7 +58,7 @@ $materielData = $materiel->searchMateriel($nom, $prenom, $service, $type_select,
     <!-- Affichage des messages d'erreur, le cas échéant -->
     <?php
     if (isset($_SESSION['error_message'])) {
-        echo '<div class="error-message">' . $_SESSION['error_message'] . '</div>';
+        echo '<div class="error-message">' . htmlspecialchars($_SESSION['error_message']) . '</div>';
         unset($_SESSION['error_message']);
     }
     ?>
@@ -90,13 +82,13 @@ $materielData = $materiel->searchMateriel($nom, $prenom, $service, $type_select,
             <?php foreach ($materielData as $row) : ?>
                 <tr>
                     <!-- Affichage des données de chaque matériel -->
-                    <td><?= htmlspecialchars($row['nom']) ?></td>
-                    <td><?= htmlspecialchars($row['prenom']) ?></td>
-                    <td><?= htmlspecialchars($row['service']) ?></td>
-                    <td><?= htmlspecialchars($row['type_select']) ?></td>
-                    <td><?= htmlspecialchars($row['_description']) ?></td>
-                    <td><?= htmlspecialchars($row['emplacement']) ?></td>
-                    <td><?= htmlspecialchars($row['annee_uc']) ?></td>
+                    <td><?= isset($row['nom_utilisateur']) ? htmlspecialchars($row['nom_utilisateur']) : '' ?></td>
+                    <td><?= isset($row['prenom_utilisateur']) ? htmlspecialchars($row['prenom_utilisateur']) : '' ?></td>
+                    <td><?= isset($row['service_utilisateur']) ? htmlspecialchars($row['service_utilisateur']) : '' ?></td>
+                    <td><?= isset($row['type_materiel']) ? htmlspecialchars($row['type_materiel']) : '' ?></td> <!-- Correction -->
+                    <td><?= isset($row['description_materiel']) ? htmlspecialchars($row['description_materiel']) : '' ?></td> <!-- Correction -->
+                    <td><?= isset($row['emplacement_materiel']) ? htmlspecialchars($row['emplacement_materiel']) : '' ?></td> <!-- Correction -->
+                    <td><?= isset($row['annee_materiel']) ? htmlspecialchars($row['annee_materiel']) : '' ?></td> <!-- Correction -->
                     <td>
                         <!-- Liens pour modifier et supprimer le matériel -->
                         <a href='src/Utils/update.php?id_materiel=<?= $row['id_materiel'] ?>'>Modifier</a> |
