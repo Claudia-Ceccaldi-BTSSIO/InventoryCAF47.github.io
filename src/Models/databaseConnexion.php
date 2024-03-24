@@ -6,8 +6,8 @@ class DatabaseConnection
     private $connection;
 
     private $host = 'localhost';
-    private $username = '******';
-    private $password = '******';
+    private $username = 'root';
+    private $password = '';
     private $database = 'applicationcaf';
 
     private function __construct()
