@@ -4,7 +4,8 @@ require_once '../Models/databaseConnexion.php';
 $dbInstance = DatabaseConnection::getInstance();
 $connexion = $dbInstance->getConnection();
 
-function clean_input($data) {
+function clean_input($data)
+{
     $data = trim($data);
     $data = stripslashes($data);
     $data = htmlspecialchars($data);
@@ -17,8 +18,6 @@ $error_message = "";
 // Si vous mettez à jour les informations via un formulaire POST
 if (isset($_POST['update']) && isset($_POST['id_materiel'])) {
     $id_materiel = clean_input($_POST['id_materiel']);
-    $nom = clean_input($_POST['nom']);
-    $prenom = clean_input($_POST['prenom']);
     $service = clean_input($_POST['service']);
     $type_select = clean_input($_POST['type_select']);
     $_description = clean_input($_POST['_description']);
@@ -26,15 +25,16 @@ if (isset($_POST['update']) && isset($_POST['id_materiel'])) {
     $annee_uc = clean_input($_POST['annee_uc']);
 
     // Préparation de la requête SQL pour mettre à jour les données
-    $stmt = $connexion->prepare("UPDATE Materiel SET nom = ?, prenom = ?, service = ?, type_select = ?, _description = ?, emplacement = ?, annee_uc = ? WHERE id_materiel = ?");
-    $stmt->bind_param("ssssssii", $nom, $prenom, $service, $type_select, $_description, $emplacement, $annee_uc, $id_materiel);
+    $stmt = $connexion->prepare("UPDATE Materiel SET service_utilisateur = ?, type_materiel = ?, description_materiel = ?, emplacement_materiel = ?, annee_materiel = ? WHERE id_materiel = ?");
+    $stmt->bind_param("sssssi", $service, $type_select, $_description, $emplacement, $annee_uc, $id_materiel);
 
     if ($stmt->execute()) {
-        header("Location: ../Views/parcView.php"); // Chemin correct pour la redirection
+        header("Location: ../Views/parcView.php"); // Modifiez le chemin pour qu'il pointe correctement vers votre fichier parcView.php
         exit;
     } else {
         $error_message = "Erreur lors de la mise à jour : " . $stmt->error;
     }
+
 
     $stmt->close();
 }
@@ -42,7 +42,7 @@ if (isset($_POST['update']) && isset($_POST['id_materiel'])) {
 // Récupérer les informations actuelles de l'élément à modifier si un id est passé via GET
 if (isset($_GET['id_materiel'])) {
     $id_materiel = clean_input($_GET['id_materiel']);
-    
+
     // Préparation de la requête SQL pour obtenir les données actuelles
     $stmt = $connexion->prepare("SELECT * FROM Materiel WHERE id_materiel = ?");
     $stmt->bind_param("i", $id_materiel);
@@ -58,4 +58,3 @@ if (isset($_GET['id_materiel'])) {
 
 // Inclusion de la vue
 require '../Views/updateView.php';
-?>

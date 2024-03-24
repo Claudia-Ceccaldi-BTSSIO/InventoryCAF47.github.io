@@ -1,6 +1,7 @@
 <?php
 require_once '../Models/databaseConnexion.php';
-function clean_input($data) {
+function clean_input($data)
+{
     // Fonction pour nettoyer les données entrantes
     $data = trim($data);
     $data = stripslashes($data);
@@ -17,25 +18,25 @@ try {
     $nom = isset($_POST['nom']) ? clean_input($_POST['nom']) : '';
     $prenom = isset($_POST['prenom']) ? clean_input($_POST['prenom']) : '';
     $service = isset($_POST['service']) ? clean_input($_POST['service']) : '';
-    $type_select = isset($_POST['type_select']) ? clean_input($_POST['type_select']) : '';
-    $_description = isset($_POST['_description']) ? clean_input($_POST['_description']) : '';
-    $emplacement = isset($_POST['emplacement']) ? clean_input($_POST['emplacement']) : '';
-    $annee_uc = isset($_POST['annee_uc']) ? clean_input($_POST['annee_uc']) : '';
+    $type_materiel = isset($_POST['type_materiel']) ? clean_input($_POST['type_materiel']) : '';
+    $description_materiel = isset($_POST['description_materiel']) ? clean_input($_POST['description_materiel']) : '';
+    $emplacement_materiel = isset($_POST['emplacement_materiel']) ? clean_input($_POST['emplacement_materiel']) : '';
+    $annee_materiel = isset($_POST['annee_materiel']) ? clean_input($_POST['annee_materiel']) : '';
 
     // Préparation de la requête SQL pour insérer les données
-    $stmt = $connexion->prepare("INSERT INTO Materiel (nom, prenom, service, type_select, _description, emplacement, annee_uc) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt = $connexion->prepare("INSERT INTO Materiel (nom_utilisateur, prenom_utilisateur, service_utilisateur, type_materiel, description_materiel, emplacement_materiel, annee_materiel) VALUES (?, ?, ?, ?, ?, ?, ?)");
     if (!$stmt) {
         throw new Exception("Erreur de préparation de la requête : " . $connexion->error);
     }
 
     // Liaison des paramètres pour la requête
-    $stmt->bind_param("ssssssi", $nom, $prenom, $service, $type_select, $_description, $emplacement, $annee_uc);
+    $stmt->bind_param("ssssssi", $nom, $prenom, $service, $type_materiel, $description_materiel, $emplacement_materiel, $annee_materiel);
 
     // Exécution de la requête
     if ($stmt->execute()) {
         // Redirection vers une autre page si nécessaire
-       header("Location: ../Views/parcView.php");
-       exit;
+        header("Location: ../Views/parcView.php");
+        exit;
     } else {
         throw new Exception("Erreur : " . $stmt->error);
     }
@@ -45,5 +46,3 @@ try {
 } catch (Exception $e) {
     echo "Erreur : " . $e->getMessage();
 }
-
-?>

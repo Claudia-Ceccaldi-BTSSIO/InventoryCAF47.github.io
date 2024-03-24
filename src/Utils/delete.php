@@ -9,13 +9,13 @@ try {
     // Vérifier si l'ID du matériel est fourni
     if (isset($_GET['id_materiel'])) {
         $id_materiel = $_GET['id_materiel'];
-        
+
         // Préparer la requête de suppression
         $stmt = $connexion->prepare("DELETE FROM Materiel WHERE id_materiel = ?");
         if (!$stmt) {
             throw new Exception("Erreur de préparation de la requête : " . $connexion->error);
         }
-        
+
         // Lier le paramètre et exécuter la requête
         $stmt->bind_param("i", $id_materiel);
         if ($stmt->execute()) {
@@ -26,7 +26,7 @@ try {
             // Gérer l'erreur d'exécution
             throw new Exception("Erreur lors de la suppression : " . $stmt->error);
         }
-        
+
         // Fermer le statement
         $stmt->close();
     } else {
@@ -37,4 +37,3 @@ try {
     // Afficher l'erreur
     echo "Erreur : " . $e->getMessage();
 }
-?>

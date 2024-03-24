@@ -5,35 +5,39 @@ include 'mailNew.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Récupération des données du formulaire
-    $materiel_tt = $_POST['materiel_tt'];
-    $ecran1_isiac = $_POST['ecran1_isiac'];
-    $ecran2_isiac = $_POST['ecran2_isiac'];
-    $uc_isiac = $_POST['uc_isiac'];
-    $enregistre_dans_GACI = isset($_POST['enregistre_dans_GACI']) ? 1 : 0;
-    $materiel = $_POST['materiel'];
-    $remis_par = $_POST['remis_par'];
+    $materiel_tt = empty($_POST['materiel_tt']) ? 'none' : $_POST['materiel_tt'];
+
+    // Vérifiez si le champ "Matériel de Télétravail" est vide ou non
+    if (!empty($_POST['materiel_tt'])) {
+        // Si le champ n'est pas vide, utilisez la fonction implode()
+        $materiel_tt = implode(',', $_POST['materiel_tt']);
+    } else {
+        // Si le champ est vide, définissez une valeur par défaut
+        $materiel_tt = 'none';
+    }
+
+    // Vérifiez si le champ "Matériel Hors Télétravail" est vide ou non
+    if (!empty($_POST['materiel'])) {
+        // Si le champ n'est pas vide, utilisez la fonction implode()
+        $materiel = implode(',', $_POST['materiel']);
+    } else {
+        // Si le champ est vide, définissez une valeur par
+        $materiel = 'none';
+    }
+
     $emprunte_par = $_POST['emprunte_par'];
     $fonction_emprunteur = $_POST['fonction_emprunteur'];
     $date_emprunt = $_POST['date_emprunt'];
-    $date_restitution = $_POST['date_restitution'];
-    $recepteur = $_POST['recepteur'];
-    $observations = $_POST['observations'];
+    $observations = empty($_POST['observations']) ? 'none' : $_POST['observations'];
 
     // Appel de la fonction pour envoyer l'e-mail
     $emailSent = envoyerMail(
         "Résumé de la demande d'emprunt de matériel",
         $materiel_tt,
-        $ecran1_isiac,
-        $ecran2_isiac,
-        $uc_isiac,
-        $enregistre_dans_GACI,
         $materiel,
-        $remis_par,
         $emprunte_par,
         $fonction_emprunteur,
         $date_emprunt,
-        $date_restitution,
-        $recepteur,
         $observations
     );
 
@@ -42,24 +46,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $connexion = $dbInstance->getConnection();
 
     // Préparation de la requête SQL
-    $stmt = $connexion->prepare("INSERT INTO AttestationsMateriel (materiel_tt, ecran1_isiac, ecran2_isiac, uc_isiac, enregistre_dans_GACI, materiel,
-     remis_par, emprunte_par, fonction_emprunteur, date_emprunt, date_restitution, recepteur, observations) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
+    $stmt = $connexion->prepare("INSERT INTO AttestationsMateriel (materiel_tt, materiel, emprunte_par, fonction_emprunteur, date_emprunt, observations) VALUES (?, ?, ?, ?, ?, ?)");
 
     // Liaison des paramètres
     $stmt->bind_param(
-        "sssissssssssss",
+        "ssssss",
         $materiel_tt,
-        $ecran1_isiac,
-        $ecran2_isiac,
-        $uc_isiac,
-        $enregistre_dans_GACI,
         $materiel,
-        $remis_par,
         $emprunte_par,
         $fonction_emprunteur,
         $date_emprunt,
-        $date_restitution,
-        $recepteur,
         $observations
     );
 
