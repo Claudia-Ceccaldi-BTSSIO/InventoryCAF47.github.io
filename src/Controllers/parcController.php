@@ -20,7 +20,7 @@ class ParcController
     {
         try {
             // Vérifier si l'utilisateur est connecté
-            require_once('../Utils/session.php');
+            require_once('../Auth/session.php');
 
             // Validation et nettoyage de la variable $_GET['search']
             $search = isset($_GET['search']) ? filter_input(INPUT_GET, 'search', FILTER_SANITIZE_STRING) : '';
