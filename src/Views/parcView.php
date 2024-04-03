@@ -26,20 +26,19 @@ $materielData = $materiel->searchMateriel($searchTerm);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PARC de la CAF 47</title>
-    <base href="http://localhost/projetcaf/">
-    <link rel="stylesheet" href="public/assets/css/main.css?v=1">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1">
 </head>
 
 <body>
     <nav>
         <!-- Barre de navigation -->
         <!-- Bouton de retour à la page d'accueil -->
-        <a href="public/index.php" class="retour-accueil">Retour à la page d'accueil</a>
+        <a href="../../index.php" class="retour-accueil">Retour à la page d'accueil</a>
     </nav>
     <!-- Bouton pour afficher le formulaire d'ajout de matériel -->
     <button id="showFormButton">Ajout d'un matériel</button>
     <!-- Formulaire d'ajout de matériel, initialement caché -->
-    <form id="ajoutMaterielForm" action="src/Utils/insert.php" method="post" style="display: none;">
+    <form id="ajoutMaterielForm" action="../Utils/insert.php" method="post" style="display: none;">
         <!-- Champs du formulaire correspondant à la structure de la table 'Materiel' -->
         <input type="text" name="nom" placeholder="Nom" required>
         <input type="text" name="prenom" placeholder="Prénom" required>
@@ -51,7 +50,7 @@ $materielData = $materiel->searchMateriel($searchTerm);
         <input type="submit" value="Ajouter">
     </form>
     <!-- Formulaire de recherche -->
-    <form action="src/Views/parcView.php" method="post">
+    <form action="../Views/parcView.php" method="post">
         <input type="text" id="search" name="search" placeholder="Rechercher par nom...">
         <input type="submit" value="Recherche">
     </form>
@@ -91,8 +90,8 @@ $materielData = $materiel->searchMateriel($searchTerm);
                     <td><?= isset($row['annee_materiel']) ? htmlspecialchars($row['annee_materiel']) : '' ?></td> <!-- Correction -->
                     <td>
                         <!-- Liens pour modifier et supprimer le matériel -->
-                        <a href='src/Utils/update.php?id_materiel=<?= $row['id_materiel'] ?>'>Modifier</a> |
-                        <a href='src/Utils/delete.php?id_materiel=<?= $row['id_materiel'] ?>' onclick='return confirm("Confirmez la suppression");'>Supprimer</a>
+                        <a href='../Utils/update.php?id_materiel=<?= $row['id_materiel'] ?>'>Modifier</a> |
+                        <a href='../Utils/delete.php?id_materiel=<?= $row['id_materiel'] ?>' onclick='return confirm("Confirmez la suppression");'>Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

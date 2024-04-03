@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mise à jour Matériel</title>
-    <base href="http://localhost/projetcaf/">
-    <link rel="stylesheet" href="public/assets/css/style_update.css?v=1">
+    <link rel="stylesheet" href="/assets/css/style_update.css?v=1">
 </head>
 
 <body>
@@ -20,7 +19,7 @@
 
     <div class="update-container">
         <?php if ($item) : ?>
-            <form action="src/Utils/update.php" method="post" class="update-form">
+            <form action="../Utils/update.php" method="post" class="update-form">
 
                 <input type="hidden" name="id_materiel" value="<?= isset($item['id_materiel']) ? htmlspecialchars($item['id_materiel']) : '' ?>">
 

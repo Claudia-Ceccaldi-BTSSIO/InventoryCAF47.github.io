@@ -100,6 +100,10 @@
             #form-container {
                 padding: 10px;
             }
+            
+            input[type="submit"] {
+                padding: 8px;
+            }
         }
     </style>
 
@@ -107,7 +111,7 @@
 
 <body>
     <div id="form-container">
-        <h2>Demande de prêt de Matériel Nomade</h2>
+        <h2>Demande de prêt de Matériel informatique</h2>
         <form action="../Utils/insertMat.php" method="post">
             <div class="form-row">
                 <!-- Champ caché pour l'identifiant id_materiel -->

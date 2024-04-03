@@ -9,8 +9,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
-    <base href="http://localhost/projetcaf/">
-    <link rel="stylesheet" href="public/assets/css/style_login.css?v=1">
+    <link rel="stylesheet" href="/assets/css/style_login.css?v=1">
 </head>
 
 <body>
@@ -21,7 +20,7 @@ session_start();
         <div class="container">
             <h2>Connexion</h2>
             <!-- Affiche le formulaire de connexion ici -->
-            <form action="src/Views/login.php" method="post">
+            <form action="login.php" method="post">
                 <label for="id_user_login">Identifiant :</label>
                 <input type="text" id="id_user_login" name="id_user" required>
                 <label for="password_login">Mot de passe :</label>

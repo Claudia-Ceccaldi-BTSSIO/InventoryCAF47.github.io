@@ -4,8 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Inscription réussie</title>
-    <base href="http://localhost/projetcaf/">
-    <link rel="stylesheet" href="public/assets/css/style_confirm.css">
+    <link rel="stylesheet" href="/assets/css/style_confirm.css">
 </head>
 
 <body>

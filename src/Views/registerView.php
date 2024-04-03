@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscription</title>
-    <link rel="stylesheet" href="../../public/assets/css/style_register.css">
+    <link rel="stylesheet" href="/assets/css/style_register.css">
     <script>
         // Fonction pour afficher ou masquer le champ de code admin en fonction du rôle sélectionné
         function toggleAdminCode() {
