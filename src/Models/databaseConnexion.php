@@ -5,10 +5,10 @@ class DatabaseConnection
     private static $instance = null;
     private $connection;
 
-    private $host = '*****';
-    private $username = '****';
-    private $password = '****';
-    private $database = '****';
+    private $host = 'localhost';
+    private $username = 'claudiasc';
+    private $password = 'claudia';
+    private $database = 'applicationcaf';
 
     private function __construct()
     {
