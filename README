@@ -12,7 +12,7 @@ User Management: Admin users can manage user accounts, including creation, modif
 
 #Technical Specifications
 Frontend: Utilizes modern web technologies like HTML5, CSS3, and JavaScript for a responsive design that is accessible across all standard web browsers and devices.
-Backend: Developed using a robust and secure web framework, Symfony for PHP, ensuring a secure and efficient server-side operation.
+Backend: Developed using PHP.
 Database: Integrates with a relational database (MySQL) for data storage, ensuring data integrity and reliability.
 Security: Implements strong security measures including user authentication, protection against common web vulnerabilities (CSRF, XSS), and data encryption for sensitive information.
 
@@ -42,7 +42,7 @@ Gestion des Utilisateurs : Les administrateurs peuvent gérer les comptes utilis
 
 #Spécifications Techniques
 Frontend : Utilise des technologies web modernes telles que HTML5, CSS3 et JavaScript pour un design réactif accessible sur tous les navigateurs web et appareils standards.
-Backend : Développée en utilisant un framework web robuste et sécurisé, Symfony pour PHP, assurant une opération côté serveur sécurisée et efficace.
+Backend : Développée en utilisant PHP.
 Base de données : Intègre une base de données relationnelle (MySQL) pour le stockage des données, assurant l'intégrité et la fiabilité des données.
 Sécurité : Implémente des mesures de sécurité fortes incluant l'authentification des utilisateurs, la protection contre les vulnérabilités web communes (CSRF, XSS) et le chiffrement des informations sensibles.
 
