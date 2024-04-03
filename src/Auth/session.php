@@ -14,6 +14,7 @@ if (!isset($_SESSION['id_user'])) {
         exit;
     } else {
         // Si l'utilisateur n'est pas connecté mais est sur 'loginView.php' ou 'registerView.php', pas besoin de rediriger
-        // mais vous pouvez afficher un message approprié si nécessaire
+        
+
     }
 }

@@ -8,5 +8,5 @@ session_destroy();
 
 // Rediriger l'utilisateur vers la page d'accueil ou de connexion
 // Modifiez le chemin si nécessaire pour correspondre à la structure de votre application
-header("location: /projetcaf/public/index.php");
+header("location: index.php");
 ?>
