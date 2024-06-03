@@ -35,6 +35,16 @@ $materielData = $materiel->searchMateriel($searchTerm);
         <!-- Bouton de retour à la page d'accueil -->
         <a href="../../index.php" class="retour-accueil">Retour à la page d'accueil</a>
     </nav>
+    <!-- Bouton pour afficher les comptes utilisateurs -->
+    <button id="showFormButton">Affichage des Comptes Utilisateurs</button>
+    <form id="ajoutMaterielForm" action="../Utils/insert.php" method="get" style="display: none;">
+        <!-- Champs du formulaire correspondant à la structure de la table 'Materiel' -->
+        <input type="text" name="nom" placeholder="Nom" required>
+        <input type="text" name="prenom" placeholder="Prénom" required>
+        <input type="text" name="service" placeholder="Service" required>
+        <input type="text" name="validation_compte_user" placeholder="validation_compte_user"required>
+        <input type="submit" value="Ajouter">
+    </form>
     <!-- Bouton pour afficher le formulaire d'ajout de matériel -->
     <button id="showFormButton">Ajout d'un matériel</button>
     <!-- Formulaire d'ajout de matériel, initialement caché -->
